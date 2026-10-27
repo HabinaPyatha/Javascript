@@ -1,9 +1,12 @@
 
 let countEl=document.getElementById("count-el");
-console.log(countEl);
 let count=0;
 function increment(){
     count = count + 1;
-    countEl.innerHTML = count;
+    countEl.textContent = count;
 }
+function save(){
+    console.log(count);
+}
+
 
