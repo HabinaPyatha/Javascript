@@ -16,4 +16,7 @@ else if(sum === 21){
     isAlive = false
 }
 
-console.log(message)
+function startGame(){
+    
+}
+
