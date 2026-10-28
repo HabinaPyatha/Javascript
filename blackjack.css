@@ -1,0 +1,21 @@
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    text-align:center;
+}
+#message-el{
+     background-color:#006b3c;
+}
+
+
+h{
+   font-weight:bold;
+   font-size:45px;
+   color:goldenrod;
+}
+p{
+    color:red;
+    font-size:30px;
+}
