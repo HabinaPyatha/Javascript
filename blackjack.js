@@ -5,6 +5,7 @@ let isAlive = false;
 let messageEl=document.getElementById("message-el");
 let sumEl=document.getElementById("sum-el");
 let cardsEl=document.getElementById("cards-el");
+let cardsContainer=document.getElementById("cards-container");
 let message = "";
 let player = {
 name:"Per",
@@ -16,27 +17,31 @@ playerEl.textContent = player.name + ": $" + player.chips;
 
 
 function getRandomCard() {
-    const suits = ["♠", "♥", "♦", "♣"];
+    const suits = ["S", "H", "D", "C"];
     const ranks = ["A", "2", "3", "4", "5", "6",
-                   "7", "8", "9", "10", "J", "Q", "K"];
+                   "7", "8", "9", "0", "J", "Q", "K"];
 
-    const index = Math.floor(Math.random() * ranks.length);
+    const rank = Math.floor(Math.random() * ranks.length);
     const suit = suits[Math.floor(Math.random() * suits.length)];
 
-    let value = index + 1;
+    let value; 
 
-    if (value === 1){
+    if (rank === "A"){
         value = 11;
     } 
-    else if (value > 10){
+    else if (["J", "Q", "K", "0"].includes(rank)){
         value = 10;
     }
+    else {
+        value = Number(rank);
+    }
 
-    return {
-        value: value,
-        display: ranks[index],
-        suit: suit
-    };
+return {
+    value: value,
+    display: rank === "0" ? "10" : rank,
+    suit: suit,
+   image:`https://deckofcardsapi.com/static/img/${rank}${suit}.png`
+}; 
 }
 
 //Calculate the hand total, adjusting Aces when needed
@@ -67,9 +72,15 @@ function startGame(){
 }
 function renderGame(){
     cardsEl.textContent = "Cards: ";
-    for (let i = 0; i < cards.length; i++){
-        cardsEl.textContent += cards[i].display + cards[i].suit + " ";
+    cardsContainer.innerHTML = "";
+   for (let card of cards) {
+        const img = document.createElement("img");
+        img.src = card.image;
+        img.alt = card.display + " of " + card.suit;
+        img.className = "playing-card";
+        cardsContainer.appendChild(img);
     }
+    sum = calculateSum();
     sumEl.textContent = "Sum:" + sum;
 if(sum < 21){
     message = "Do you want to draw a new card?🙂"
