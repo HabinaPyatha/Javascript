@@ -21,7 +21,8 @@ function getRandomCard() {
     const ranks = ["A", "2", "3", "4", "5", "6",
                    "7", "8", "9", "0", "J", "Q", "K"];
 
-    const rank = Math.floor(Math.random() * ranks.length);
+    const rankIndex= Math.floor(Math.random() * ranks.length);
+    const rank = ranks[rankIndex];
     const suit = suits[Math.floor(Math.random() * suits.length)];
 
     let value; 
